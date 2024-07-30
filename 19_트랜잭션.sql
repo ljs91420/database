@@ -62,3 +62,22 @@ SELECT * FROM fruits;
 ROLLBACK TO purchase2;
 ROLLBACK TO purchase3;
 ROLLBACK; -- 세이브포인트를 모두 무시하고 가장 최근 커밋 상태로 돌아간다.
+
+SELECT * FROM user_constraints WHERE table_name = 'FRUITS';
+
+ALTER TABLE fruits MODIFY (
+    qty NUMBER(7) CONSTRAINT fqty_must_positive CHECK(qty >= 0)
+);
+SELECT * FROM fruits;
+UPDATE fruits SET qty = qty - 10000 WHERE fname = '포도';
+
+SELECT COUNT(*) FROM sales WHERE sale_date = TO_CHAR(sysdate, 'YY/MM/DD');
+
+DESC sales;
+ALTER TABLE sales MODIFY (
+    purchase NUMBER(9) default 0,
+    sales NUMBER(9) default 0,
+    refund NUMBER(9) default 0
+);
+SELECT * FROM sales;
+SELECT * FROM fruits;
