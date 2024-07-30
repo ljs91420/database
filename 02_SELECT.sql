@@ -16,7 +16,7 @@ SELECT first_name, last_name FROM employees;
 SELECT country_name FROM countries;
 
 -- 쿼리문, 컬럼명, 테이블명은 대소문자를 구분하지 않는다.
-select EMail, PhOnE_NuMBer FrOm eMpLOyEEs;
+select EMail, PhOnE_NuMBer FrOm employees;
 
 -- # 연습용 계정 HR에 미리 만들어져 있는 연습용 테이블들
 SELECT * FROM tab;
@@ -77,7 +77,6 @@ SELECT first_name AS 이름, last_name AS 성 FROM employees;
 SELECT first_name AS 이름, hire_date AS "고용 날짜" FROM employees;
 
 -- # 컬럼에 산술 연산자를 활용해 계산된 결과를 얻을 수 있다.
--- Ctrl + F7 : 세로로 정렬
 SELECT
     first_name AS 이름,
     salary AS 월급,
@@ -103,4 +102,14 @@ FROM
 SELECT first_name || ' ' || last_name AS full_name FROM employees;
 
 -- 연습 : 모든 사원들의 사원번호/풀네임/직책/연봉을 조회해보세요.
-SELECT employee_id, first_name || ' ' || last_name AS full_name, salary * 12 AS annual_salary FROM employees;
+SELECT employee_id, first_name || ' ' || last_name AS full_name, job_id, salary * 12 AS annual_salary FROM employees;
+
+-- 연습2 : 모든 사원들의 풀네임/보너스 비율/보너스 금액/보너스를 합친 총 월급을 조회해보세요.
+--        ※ 단, 보너스 비율 및 보너스 금액은 null이 나와서는 안 된다.
+SELECT
+    first_name || ' ' || last_name AS full_name,
+    nvl(commission_pct, 0) AS bonus_rate,
+    salary * nvl(commission_pct, 0) AS total_bonus,
+    salary + salary * nvl(commission_pct, 0) AS total_salary
+FROM
+    employees;
