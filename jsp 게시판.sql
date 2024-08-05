@@ -11,5 +11,8 @@ CREATE TABLE board (
     board_bad_count NUMBER(8) DEFAULT 0
 );
 
+-- id를 8자리로 설정했으므로 시퀀스도 99999999가 최대값이 되어야 한다.
+CREATE SEQUENCE board_id_seq NOCACHE NOCYCLE START WITH 1 INCREMENT BY 1 MAXVALUE 99999999;
+
 SELECT * FROM user_constraints;
 SELECT * FROM board;
