@@ -7,3 +7,5 @@ CREATE TABLE ProfileImage (
 CREATE SEQUENCE profile_image_seq NOCACHE NOCYCLE;
 
 DESC profileImage;
+
+SELECT * FROM profileImage;
